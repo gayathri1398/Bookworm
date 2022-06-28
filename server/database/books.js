@@ -1,9 +1,13 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const BookSchema =new Schema ({
+const BookSchema =new mongoose.Schema({
 
     title:{type:String,required:true},
     isbn:{type:String,required:true},
+    image:{
+        type:mongoose.Types.ObjectId,
+         ref:"images"
+        },
     author:{type:String,required:true},
     description:{type:String,required:true},
     publishedDate:{type:Date},
@@ -13,6 +17,7 @@ const BookSchema =new Schema ({
     timestamps:true
 });
 
-const BookModel = mongoose.Model("books",BookSchema);
+const BookModel = mongoose.model("books",BookSchema);
+// export const BookModel = mongoose.model("books",BookSchema);
 
 module.exports= BookModel;

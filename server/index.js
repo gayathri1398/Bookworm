@@ -1,13 +1,33 @@
 
 require("dotenv").config();
+
+// libraries
 import express from "express";
+import bodyParser from "body-parser";
 
-const lib = express();
 
-lib.use(express.json());
+
 
 // DatabaseConnection
 import ConnectDB from './database/connection'
+
+// API routes
+import Book from './API/bookAPI/book.js';
+import Image from './API/imageAPI/image.js'
+
+const lib = express();
+
+
+// application middleware
+lib.use(express.json());
+lib.use(express.urlencoded({ extended: true }))
+
+
+// application routes
+lib.use("/book",Book);
+lib.use("/image",Image)
+
+
 
 lib.get("/",(req,res)=>res.send("Successfully,setup done!!"));
 
