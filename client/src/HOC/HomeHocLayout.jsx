@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route,Routes} from 'react-router-dom';
+// import {Route,Routes} from 'react-router-dom';
 import HomeLayout from '../layouts/HomeLayout';
 
 const HomeHocLayout = ({Component,...rest}) => {
