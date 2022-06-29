@@ -6,7 +6,7 @@ import {TbPlant2} from "react-icons/tb";
 const Navbarlg= () => {
   return (
     <>
-    <nav className='hidden lg:flex flex-row container mx-auto p-8 items-start w-full'>
+    <nav className='hidden lg:flex flex-row container mx-auto  items-start w-full'>
         <p className='font-bold italic text-xl basis-1/4 flex gap-2 items-center'>Knowlege Hunt <TbPlant2 className='text-2xl'/></p>
         <div className='basis-3/4 flex gap-16 font-semibold text-gray-700 '>
         <p >Home</p>
@@ -19,14 +19,14 @@ const Navbarlg= () => {
         placeholder='Search For any books' 
         className='text-sm px-1 py-2 w-full outline-none' 
         />
-        <AiOutlineSearch className='text-2xl'/>
+        <AiOutlineSearch className='text-2xl '/>
        </div>
        
         </div>
         <div className='flex basis-2/12 justify-end gap-8 items-center text-gray-800 font-semibold'>
-        <AiOutlineShoppingCart className='text-2xl' />
-        <p>Login</p>
-        <p>SignUp</p>
+        <AiOutlineShoppingCart className='text-2xl cursor-grab' />
+        <button>Login</button>
+        <button>SignUp</button>
         
         </div>
         
@@ -38,15 +38,15 @@ const Navbarlg= () => {
 
  const Navbarsm = () => {
   return (<>
-  <nav className='block container mx-auto px-2 lg:hidden'>
+  <nav className='block container mx-auto  lg:hidden'>
     <div className='flex justify-between  py-3'>
     <div className='flex lg:hidden'>
       <p className='font-semibold text-lg flex gap-2 items-center italic '>Knowledge hunt <TbPlant2 className='text-2xl'/></p>
     </div>
     <div className='flex gap-2 items-center'>
         <AiOutlineShoppingCart className='text-2xl' />
-        <p>Login</p>
-        <p>SignUp</p>
+        <button>Login</button>
+        <button>SignUp</button>
     </div>
     </div>
     <div className='w-full flex items-center border-2 rounded-sm  '>
