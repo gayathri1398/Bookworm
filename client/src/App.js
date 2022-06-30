@@ -11,6 +11,9 @@ import Temp from './pages/Temp';
 import TempCopy from './pages/Temp copy';
 
 
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 function App() {

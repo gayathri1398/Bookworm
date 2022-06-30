@@ -1,21 +1,25 @@
 import React from 'react'
 
-const BookCard = () => {
+
+
+const BookCard = (props) => {
   return (
-    <div className='w-48 border'>
+  <>
+     <div className='w-56 border'>
         <div className='w-full '>
-        <img src="https://d2g9wbak88g7ch.cloudfront.net/productimages/mainimages/268/9789390166268.jpg"
-         alt="book image" 
+        <img src={props.image}
+         alt={props.title} 
          className='w-full'/>
         </div>
         <div className='flex flex-col gap-2 py-3 px-1'>
-        <h1 className='text-gray-600 text-md font-bold'>Book Title</h1>
-        <p className='text-gray-400 text-sm '>Descriptipn</p>
+        <h1 className='text-gray-600 text-md font-bold'>{props.title}</h1>
+        <p className='text-gray-400 text-sm '>{props.description}</p>
        <div className='flex gap-2'>
-       <span className='text-red-500'>₹120</span><p className='line-through'>₹150 </p>
+       <span className='text-red-500'>₹120</span><p className='line-through'>₹{props.price} </p>
        </div>
         </div>
-        </div>
+         </div>
+        </>
   )
 }
 
