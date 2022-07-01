@@ -1,5 +1,6 @@
 
 import express from 'express';
+import mongoose from 'mongoose';
 
 
 const Router = express.Router();
@@ -47,5 +48,83 @@ Router.post("/new",async(req,res)=>{
        return res.status(500).json({error:error.message})
     }
 });
+
+
+/*
+Route                   /
+Des                     get a specific book
+Params                  /:_id
+Access                  Public
+Method                  GET
+*/
+Router.get("/:_id",async(req,res)=>{
+   try {
+      const{_id}= req.params;
+     console.log(typeof(_id));
+      const specificBook = await BookModel.findOne({_id});
+       
+   //   console.log(typeof(_id));
+      // const id= req.params._id;
+      // const specificBook = await BookModel.findOne({_id:id});
+
+      if(!specificBook){
+         return res.send(`No such book with the id:${_id}`)
+      }
+      return res.status(500).json({specificBook})
+   } catch (error) {
+    return res.status(500).json({error:error.message})  
+   }
+});
+
+
+/*
+Route                       /
+Des                         add a new property to books
+Params                      /:add/:_id
+Access                      Public
+Method                      GET
+*/
+Router.post("/:add/:_id",async(req,res)=>{
+   try {
+      const {updatedAuthor} = req.body;
+      const updateBook = await BookModel.findOneAndUpdate(
+         {_id:req.params._id},
+         {author:updatedAuthor},
+         {new:true});
+      if(!updateBook){
+         res.send(`No such Book with the id ${req.params._id}`)
+      }
+      return res.json({updateBook})
+   } catch (error) {
+      return res.json({error:error.message})
+   }
+})
+
+// insert a property to mongodb book model
+
+Router.put("/:insert/:property/:_id",async(req,res)=>{
+   try {
+      const id=req.params._id;
+      const {publisher} =req.body;
+      console.log(typeof(id));
+      console.log(id);
+      const {addProperty} = await BookModel.updateOne(
+         {_id:id},
+         {$setOnInsert:
+            {publisher:publisher}
+         },
+         {upsert:true})
+      if(!addProperty){
+         return res.send(`No such Book with the id ${id}`)
+      }
+      return res.json({addProperty})
+   } catch (error) {
+      return res.json({error:error.message})
+   }
+})
+
+
+
+
 
 export default Router;
