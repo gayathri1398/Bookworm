@@ -60,7 +60,7 @@ Method                  GET
 Router.get("/:_id",async(req,res)=>{
    try {
       const{_id}= req.params;
-     console.log(typeof(_id));
+   //   console.log(typeof(_id));
       const specificBook = await BookModel.findOne({_id});
        
    //   console.log(typeof(_id));
@@ -102,28 +102,59 @@ Router.post("/:add/:_id",async(req,res)=>{
 
 // insert a property to mongodb book model
 
-Router.put("/:insert/:property/:_id",async(req,res)=>{
+// Router.put("/:insert/:property/:_id",async(req,res)=>{
+//    try {
+//       const id=req.params._id;
+//       const {publisher} =req.body;
+//       console.log(typeof(id));
+//       console.log(id);
+//       console.log(publisher);
+      
+//       const addProperty = await BookModel.insert({
+//          // {_id:id,
+//          // {$set:
+//          //    {publisher:publisher}
+//          // },
+//         publisher:publisher}
+        
+//          // function (err, addProperty) {
+//          //    if (err) {
+//          //      console.log(err);
+//          //    } else {
+//          //      console.log("Updated books : ", addProperty);
+//          //    }
+//          //  }
+//          )
+//       // if(!addProperty){
+//       //    return res.send(`No such Book with the id ${id}`)
+//       // }
+//       return res.json({addProperty})
+//    } catch (error) {
+//       return res.json({error:error.message})
+//    }
+// })
+
+
+/*
+Route                   /
+Des                     get a specificbook based on a category
+Params                  /:category
+Access                  Public
+Method                  GET
+*/
+
+Router.get("/c/:category",async(req,res)=>{
    try {
-      const id=req.params._id;
-      const {publisher} =req.body;
-      console.log(typeof(id));
-      console.log(id);
-      const {addProperty} = await BookModel.updateOne(
-         {_id:id},
-         {$setOnInsert:
-            {publisher:publisher}
-         },
-         {upsert:true})
-      if(!addProperty){
-         return res.send(`No such Book with the id ${id}`)
+      const {category} = req.params;
+      const categorizedBooks = await BookModel.findOne({category:{$regex:category,$options:"i"}});
+      if(!categorizedBooks){
+        return res.status(404).message("No such category");
       }
-      return res.json({addProperty})
+      return res.status(200).json({Books:categorizedBooks});
    } catch (error) {
       return res.json({error:error.message})
    }
 })
-
-
 
 
 

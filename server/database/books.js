@@ -10,6 +10,7 @@ const BookSchema =new mongoose.Schema({
         },
     author:{type:String,required:true},
     description:{type:String,required:true},
+    category:[{type:String,required:true}],
     publishedDate:{type:Date},
     price:{type:String,default:"₹120"}
 
